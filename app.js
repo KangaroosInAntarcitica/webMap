@@ -7,6 +7,8 @@ const https = require('https');
 // All the presets here
 // Reads from a specified file all previously parsed information. Saves all the information (old + new) to the
 // save file. Sends all request to url.
+// You can read and save to the same file, but this is not recommended, because all the information will be lost
+// if program crashes while writing to file.
 const read_from = 'geocodes.list';
 const save_to = 'geocodes2.list';
 // const url = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates' +
@@ -20,6 +22,7 @@ let locationsLength;
 const errors = [];
 
 function readResults(){
+    // function reads from read_from file and saves to readyLocations array
     let file = fs.createReadStream(read_from, 'utf-8');
     let data = '';
 
@@ -41,6 +44,7 @@ function readResults(){
 }
 
 function readFilms() {
+    // finds more locations in 'locations.list' and saves to locations array
     const file = fs.createReadStream('locations.list', 'utf-8');
     let data = '';
 
